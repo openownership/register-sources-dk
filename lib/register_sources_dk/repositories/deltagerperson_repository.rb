@@ -66,6 +66,99 @@ module RegisterSourcesDk
         true
       end
 
+      def get_by_bods_identifiers(identifiers)
+        # Person Statement
+        #[
+        #  RegisterSourcesBods::Identifier.new(
+        #    id: dk_record.enhedsNummer.to_s,
+        #    schemeName: 'DK Centrale Virksomhedsregister',
+        #  )
+        #]
+
+        # Child Entity Statement
+        # https://github.com/openownership/register-transformer-dk/blob/master/lib/register_transformer_dk/bods_mapping/record_processor.rb
+        # RegisterSourcesBods::Identifier.new(
+        #  scheme: 'DK-CVR',
+        #  schemeName: 'Danish Central Business Register',
+        #  id: company_number # relation[:company].cvrNummer.to_s
+        #)
+        # dk_record.virksomhedSummariskRelation.each_with_object([]) do |item, acc|
+        # item.virksomhed
+        # relation[:company].cvrNummer.to_s
+
+        company_ids = []
+        person_ids = []
+        identifiers.each do |identifier|
+          case identifier.schemeName
+          when 'DK Centrale Virksomhedsregister'
+            person_ids << identifier.id
+          when 'Danish Central Business Register'
+            company_ids << identifier.id
+          end
+        end
+
+        return [] if company_ids.empty? && person_ids.empty?
+
+        process_results(
+          client.search(
+            index: index,
+            body: {
+              query: {
+                bool: {
+                  should: company_ids.map { |company_id|
+                    {
+                      bool: {
+                        must: [
+                          { match: { "company_number": { query: company_id } } },
+                        ]
+                      }
+                    }
+                  } + company_ids.map { |company_id|
+                    {
+                      bool: {
+                        must: [
+                          {
+                            nested: {
+                              path: "data.identification",
+                              query: {
+                                bool: {
+                                  must: [
+                                    { match: { "data.identification.registration_number": { query: company_id } } },
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  } + links.map { |link|
+                    {
+                      bool: {
+                        must: [
+                          {
+                            nested: {
+                              path: "data.links",
+                              query: {
+                                bool: {
+                                  must: [
+                                    { match: { "data.links.self": { query: link } } },
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          )
+        ).map(&:record)
+      end
+
       private
 
       attr_reader :client, :index
