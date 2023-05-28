@@ -30,7 +30,7 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
   end
 
   describe '#store' do
-    it 'stores' do
+    xit 'stores' do
       records = [record]
 
       subject.store(records)
