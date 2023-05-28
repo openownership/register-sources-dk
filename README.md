@@ -1,6 +1,6 @@
 # Register Sources DK
 
-Register Sources DK is designed for inclusion as a library for use with the People with significant control (DK) data published by Companies House in the UK. See http://download.companieshouse.gov.uk/en_dkdata.html for an example of their latest snapshot data.
+Register Sources DK is designed for inclusion as a library for use with the beneficial ownership data from Denmark's Central Business Register published by the Danish Business Authority.
 
 There are two primary purposes for this library:
 
