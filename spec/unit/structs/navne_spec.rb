@@ -3,12 +3,12 @@ require 'register_sources_dk/structs/navne'
 RSpec.describe RegisterSourcesDk::Navne do
   let(:valid) do
     {
-      "navn": "Danish Company 1",
-      "periode": {
-        "gyldigFra": "2015-01-01",
-        "gyldigTil": "2015-01-02"
+      navn: "Danish Company 1",
+      periode: {
+        gyldigFra: "2015-01-01",
+        gyldigTil: "2015-01-02",
       },
-      "sidstOpdateret": "2015-01-02T00:00:00.000+02:00"
+      sidstOpdateret: "2015-01-02T00:00:00.000+02:00",
     }
   end
 

@@ -4,7 +4,7 @@ require 'register_sources_dk/structs/deltagerperson'
 
 module RegisterSourcesDk
   module Repositories
-    class DeltagerpersonRepository      
+    class DeltagerpersonRepository
       UnknownRecordKindError = Class.new(StandardError)
       ElasticsearchError = Class.new(StandardError)
 
@@ -18,23 +18,23 @@ module RegisterSourcesDk
       def get(etag)
         process_results(
           client.search(
-            index: index,
+            index:,
             body: {
               query: {
                 bool: {
                   must: [
                     {
                       match: {
-                        "etag": {
-                          query: etag
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          )
+                        etag: {
+                          query: etag,
+                        },
+                      },
+                    },
+                  ],
+                },
+              },
+            },
+          ),
         ).first&.record
       end
 
@@ -45,14 +45,14 @@ module RegisterSourcesDk
           raise 'no etag' unless record.etag
 
           {
-            index:  {
+            index: {
               _index: index,
               _id: record.etag,
               data: {
                 Vrdeltagerperson: record.to_h,
-                etag: record.etag
-              }
-            }
+                etag: record.etag,
+              },
+            },
           }
         end
 

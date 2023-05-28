@@ -5,7 +5,8 @@ require 'register_sources_dk/structs/navne'
 require 'register_sources_dk/structs/vaerdier'
 
 module RegisterSourcesDk
-  class Fusioner < Dry::Struct # Note: duplicate
+  # NOTE: duplicate
+  class Fusioner < Dry::Struct
     transform_keys(&:to_sym)
 
     attribute? :enhedsNummerOrganisation, Types::Nominal::Integer.optional # long
