@@ -1,4 +1,3 @@
-
 require 'register_sources_dk/types'
 
 require 'register_sources_dk/structs/beskaeftigelse'

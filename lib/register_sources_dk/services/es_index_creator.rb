@@ -19,7 +19,7 @@ module RegisterSourcesDk
       def create_index
         mappings = load_mappings
 
-        client.indices.create index: es_index, body: { mappings: mappings }
+        client.indices.create index: es_index, body: { mappings: }
       end
 
       private

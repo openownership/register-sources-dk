@@ -45,7 +45,7 @@ module RegisterSourcesDk
 
     def etag
       return if sidstOpdateret.blank? || enhedsNummer.blank?
-  
+
       XXhash.xxh64("#{sidstOpdateret}_#{enhedsNummer}").to_s
     end
   end

@@ -3,14 +3,14 @@ require 'register_sources_dk/structs/beskaeftigelse'
 RSpec.describe RegisterSourcesDk::Beskaeftigelse do
   let(:valid) do
     {
-      "aar": 2012,
-      "antalInklusivEjere": nil,
-      "antalAarsvaerk": 0,
-      "antalAnsatte": 0,
-      "sidstOpdateret": "2012-04-12T08:00:01.000+01:00",
-      "intervalKodeAntalInklusivEjere": nil,
-      "intervalKodeAntalAarsvaerk": "ANTAL_0_0",
-      "intervalKodeAntalAnsatte": "ANTAL_0_0"
+      aar: 2012,
+      antalInklusivEjere: nil,
+      antalAarsvaerk: 0,
+      antalAnsatte: 0,
+      sidstOpdateret: "2012-04-12T08:00:01.000+01:00",
+      intervalKodeAntalInklusivEjere: nil,
+      intervalKodeAntalAarsvaerk: "ANTAL_0_0",
+      intervalKodeAntalAnsatte: "ANTAL_0_0",
     }
   end
 

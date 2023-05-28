@@ -3,8 +3,8 @@ require 'register_sources_dk/structs/periode'
 RSpec.describe RegisterSourcesDk::Periode do
   let(:valid) do
     {
-      "gyldigFra": "2015-01-01",
-      "gyldigTil": nil
+      gyldigFra: "2015-01-01",
+      gyldigTil: nil,
     }
   end
 

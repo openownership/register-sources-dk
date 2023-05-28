@@ -3,20 +3,20 @@ require 'register_sources_dk/structs/postadresse'
 RSpec.describe RegisterSourcesDk::Postadresse do
   let(:valid) do
     {
-      "landekode": "DK",
-      "fritekst": nil,
-      "husnummerFra": 1,
-      "husnummerTil": nil,
-      "etage": nil,
-      "conavn": nil,
-      "postboks": nil,
-      "vejnavn": "Example Vej",
-      "postnummer": 1234,
-      "postdistrikt": "Example Town",
-      "periode": {
-        "gyldigFra": "2015-01-01",
-        "gyldigTil": nil
-      }
+      landekode: "DK",
+      fritekst: nil,
+      husnummerFra: 1,
+      husnummerTil: nil,
+      etage: nil,
+      conavn: nil,
+      postboks: nil,
+      vejnavn: "Example Vej",
+      postnummer: 1234,
+      postdistrikt: "Example Town",
+      periode: {
+        gyldigFra: "2015-01-01",
+        gyldigTil: nil,
+      },
     }
   end
 
@@ -36,6 +36,6 @@ RSpec.describe RegisterSourcesDk::Postadresse do
 
     expect(postadresse.periode).to be_a RegisterSourcesDk::Periode
     expect(postadresse.periode.gyldigFra).to eq "2015-01-01"
-    expect(postadresse.periode.gyldigTil).to eq nil
+    expect(postadresse.periode.gyldigTil).to be_nil
   end
 end

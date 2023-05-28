@@ -3,13 +3,13 @@ require 'register_sources_dk/structs/branche'
 RSpec.describe RegisterSourcesDk::Branche do
   let(:valid) do
     {
-      "branchekode": "672186",
-      "branchetekst": "branchetekst",
-      "periode": {
-        "gyldigFra": "2017-05-05",
-        "gyldigTil": "2017-08-28"
+      branchekode: "672186",
+      branchetekst: "branchetekst",
+      periode: {
+        gyldigFra: "2017-05-05",
+        gyldigTil: "2017-08-28",
       },
-      "sidstOpdateret": "2017-11-28T16:05:24.000+01:00"
+      sidstOpdateret: "2017-11-28T16:05:24.000+01:00",
     }
   end
 
