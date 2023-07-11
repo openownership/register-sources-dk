@@ -3,7 +3,7 @@
     "etag": {
       "type": "keyword"
     },
-    "Vrvirksomhed": {
+    "Vrdeltagerperson": {
       "properties": {
         "adresseHemmelig": {
           "type": "boolean"
@@ -644,6 +644,7 @@
               }
             },
             "virksomhed": {
+              "type": "nested",
               "properties": {
                 "cvrNummer": {
                   "type": "keyword"
