@@ -66,6 +66,62 @@ module RegisterSourcesDk
         true
       end
 
+      def get_by_bods_identifiers(identifiers)
+        enheds_nummers = [] # enhedsNummer
+        cvrs = [] # virksomhedSummariskRelation.virksomhed.cvrNummer
+        identifiers.each do |identifier|
+          case identifier.schemeName
+          when 'Danish Central Business Register'
+            cvrs << identifier.id
+          when 'DK Centrale Virksomhedsregister'
+            enheds_nummers << identifier.id
+          end
+        end
+
+        return [] if cvrs.empty? && enheds_nummers.empty?
+
+        process_results(
+          client.search(
+            index:,
+            body: {
+              query: {
+                bool: {
+                  should: enheds_nummers.map { |id|
+                    {
+                      bool: {
+                        must: [
+                          { match: { 'Vrdeltagerperson.enhedsNummer': { query: id.to_i } } },
+                        ],
+                      },
+                    }
+                  } + cvrs.map do |id|
+                    {
+                      bool: {
+                        must: [
+                          {
+                            nested: {
+                              path: "Vrdeltagerperson.virksomhedSummariskRelation.virksomhed",
+                              query: {
+                                bool: {
+                                  must: [
+                                    { match: { 'Vrdeltagerperson.virksomhedSummariskRelation.virksomhed.cvrNummer': { query: id.to_i } } },
+                                  ],
+                                },
+                              },
+                            },
+                          },
+                        ],
+                      },
+                    }
+                  end,
+                },
+              },
+              size: 10_000,
+            },
+          ),
+        ).map(&:record)
+      end
+
       private
 
       attr_reader :client, :index
