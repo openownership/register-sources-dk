@@ -98,18 +98,7 @@ module RegisterSourcesDk
                     {
                       bool: {
                         must: [
-                          {
-                            nested: {
-                              path: "Vrdeltagerperson.virksomhedSummariskRelation.virksomhed",
-                              query: {
-                                bool: {
-                                  must: [
-                                    { match: { 'Vrdeltagerperson.virksomhedSummariskRelation.virksomhed.cvrNummer': { query: id.to_i } } },
-                                  ],
-                                },
-                              },
-                            },
-                          },
+                          { match: { 'Vrdeltagerperson.virksomhedSummariskRelation.virksomhed.cvrNummer': { query: id.to_i } } },
                         ],
                       },
                     }
