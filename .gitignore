@@ -11,4 +11,6 @@ notes/
 
 # rspec failure tracking
 .rspec_status
-.env
+
+/.env*
+/docker-compose.*.yml
