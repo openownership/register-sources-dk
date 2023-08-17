@@ -66,7 +66,7 @@ module RegisterSourcesDk
         true
       end
 
-      def get_by_bods_identifiers(identifiers)
+      def get_by_bods_identifiers(identifiers, per_page: nil)
         enheds_nummers = [] # enhedsNummer
         cvrs = [] # virksomhedSummariskRelation.virksomhed.cvrNummer
         identifiers.each do |identifier|
@@ -105,7 +105,7 @@ module RegisterSourcesDk
                   end,
                 },
               },
-              size: 10_000,
+              size: per_page || 10_000,
             },
           ),
         ).map(&:record)
