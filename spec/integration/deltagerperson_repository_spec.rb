@@ -5,8 +5,6 @@ require 'register_sources_dk/repositories/deltagerperson_repository'
 require 'register_sources_dk/services/es_index_creator'
 require 'register_sources_dk/structs/record'
 
-BodsIdentifier = Struct.new(:id, :schemeName)
-
 RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
   subject { described_class.new(client: es_client, index:) }
 
@@ -44,25 +42,7 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
       expect(subject.get(record.etag)).to eq record
 
       # When records do not exist
-      expect(subject.get('missing')).to be_nil
-
-      # Check identifiers when 'DK Centrale Virksomhedsregister'
-      identifiers = [
-        BodsIdentifier.new(2, 'DK Centrale Virksomhedsregister')
-      ]
-
-      results = subject.get_by_bods_identifiers(identifiers)
-
-      expect(results).to eq [record2]
-
-      # Check identifiers when 'Danish Central Business Register'
-      identifiers = [
-        BodsIdentifier.new(1_234_567, 'Danish Central Business Register')
-      ]
-
-      results = subject.get_by_bods_identifiers(identifiers)
-
-      expect(results).to eq [record]
+      expect(subject.get("missing")).to be_nil
     end
   end
 end

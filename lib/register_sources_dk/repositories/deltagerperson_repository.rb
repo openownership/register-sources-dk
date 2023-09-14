@@ -9,7 +9,7 @@ module RegisterSourcesDk
       ElasticsearchError = Class.new(StandardError)
 
       SearchResult = Struct.new(:record, :score)
-      
+
       class SearchResults < Array
         def initialize(arr, total_count: nil, aggs: nil)
           @total_count = total_count || arr.to_a.count
