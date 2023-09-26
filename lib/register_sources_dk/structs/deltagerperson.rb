@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'xxhash'
 require 'register_sources_dk/types'
 

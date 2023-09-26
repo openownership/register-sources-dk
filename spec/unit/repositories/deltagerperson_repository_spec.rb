@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'register_sources_dk/repositories/deltagerperson_repository'
 
@@ -13,54 +15,54 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
         Vrdeltagerperson: {
           navne: [
             {
-              navn: "Danish Person 1",
+              navn: 'Danish Person 1',
               periode: {
                 gyldigFra: nil,
-                gyldigTil: nil,
-              },
-            },
+                gyldigTil: nil
+              }
+            }
           ],
           beliggenhedsadresse: [
             {
-              landekode: "DK",
+              landekode: 'DK',
               fritekst: nil,
               husnummerFra: 1,
               husnummerTil: nil,
               etage: nil,
               conavn: nil,
               postboks: nil,
-              vejnavn: "Example Vej",
+              vejnavn: 'Example Vej',
               postnummer: 1234,
-              postdistrikt: "Example Town",
+              postdistrikt: 'Example Town',
               periode: {
-                gyldigFra: "2015-01-01",
-                gyldigTil: nil,
-              },
-            },
+                gyldigFra: '2015-01-01',
+                gyldigTil: nil
+              }
+            }
           ],
           virksomhedSummariskRelation: [
             {
               virksomhed: {
-                enhedstype: "VIRKSOMHED",
+                enhedstype: 'VIRKSOMHED',
                 fejlRegistreret: false,
-                sidstOpdateret: "2015-01-02T00:00:00.000+02:00",
+                sidstOpdateret: '2015-01-02T00:00:00.000+02:00',
                 cvrNummer: 1_234_567,
                 navne: [
                   {
-                    navn: "Danish Company 1",
+                    navn: 'Danish Company 1',
                     periode: {
-                      gyldigFra: "2015-01-01",
-                      gyldigTil: "2015-01-02",
-                    },
+                      gyldigFra: '2015-01-01',
+                      gyldigTil: '2015-01-02'
+                    }
                   },
                   {
-                    navn: "Renamed Danish Company 1",
+                    navn: 'Renamed Danish Company 1',
                     periode: {
-                      gyldigFra: "2015-01-02",
-                      gyldigTil: nil,
-                    },
-                  },
-                ],
+                      gyldigFra: '2015-01-02',
+                      gyldigTil: nil
+                    }
+                  }
+                ]
               },
               organisationer: [
                 {
@@ -68,54 +70,54 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
                     {
                       attributter: [
                         {
-                          type: "EJERANDEL_PROCENT",
+                          type: 'EJERANDEL_PROCENT',
                           vaerdier: [
                             {
-                              vaerdi: "0.5",
-                            },
-                          ],
+                              vaerdi: '0.5'
+                            }
+                          ]
                         },
                         {
-                          type: "EJERANDEL_STEMMERET_PROCENT",
+                          type: 'EJERANDEL_STEMMERET_PROCENT',
                           vaerdier: [
                             {
-                              vaerdi: "0.5",
-                            },
-                          ],
+                              vaerdi: '0.5'
+                            }
+                          ]
                         },
                         {
-                          type: "FUNKTION",
+                          type: 'FUNKTION',
                           vaerdier: [
                             {
-                              vaerdi: "Reel ejer",
+                              vaerdi: 'Reel ejer',
                               periode: {
-                                gyldigFra: "2015-01-01",
-                                gyldigTil: nil,
+                                gyldigFra: '2015-01-01',
+                                gyldigTil: nil
                               },
-                              sidstOpdateret: "2015-01-02T00:00:00.000+02:00",
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
+                              sidstOpdateret: '2015-01-02T00:00:00.000+02:00'
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             },
             {
               virksomhed: {
-                enhedstype: "VIRKSOMHED",
+                enhedstype: 'VIRKSOMHED',
                 fejlRegistreret: false,
                 cvrNummer: 89_101_112,
                 navne: [
                   {
-                    navn: "Danish Company 2",
+                    navn: 'Danish Company 2',
                     periode: {
-                      gyldigFra: "2015-01-01",
-                      gyldigTil: nil,
-                    },
-                  },
-                ],
+                      gyldigFra: '2015-01-01',
+                      gyldigTil: nil
+                    }
+                  }
+                ]
               },
               organisationer: [
                 {
@@ -123,56 +125,56 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
                     {
                       attributter: [
                         {
-                          type: "EJERANDEL_PROCENT",
+                          type: 'EJERANDEL_PROCENT',
                           vaerdier: [
                             {
-                              vaerdi: "0.5",
-                            },
-                          ],
+                              vaerdi: '0.5'
+                            }
+                          ]
                         },
                         {
-                          type: "EJERANDEL_STEMMERET_PROCENT",
+                          type: 'EJERANDEL_STEMMERET_PROCENT',
                           vaerdier: [
                             {
-                              vaerdi: "0.5",
-                            },
-                          ],
+                              vaerdi: '0.5'
+                            }
+                          ]
                         },
                         {
-                          type: "FUNKTION",
+                          type: 'FUNKTION',
                           vaerdier: [
                             {
-                              vaerdi: "Reel ejer",
+                              vaerdi: 'Reel ejer',
                               periode: {
-                                gyldigFra: "2015-01-01",
-                                gyldigTil: nil,
+                                gyldigFra: '2015-01-01',
+                                gyldigTil: nil
                               },
-                              sidstOpdateret: "2015-01-01T00:00:00.000+02:00",
-                            },
-                          ],
+                              sidstOpdateret: '2015-01-01T00:00:00.000+02:00'
+                            }
+                          ]
                         },
                         {
-                          type: "SÆRLIGE_EJERFORHOLD",
+                          type: 'SÆRLIGE_EJERFORHOLD',
                           vaerdier: [
                             {
-                              vaerdi: "Har indirekte besiddelser",
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
+                              vaerdi: 'Har indirekte besiddelser'
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
           ],
           fejlRegistreret: false,
           enhedsNummer: 1,
-          enhedstype: "PERSON",
-          sidstOpdateret: "2015-01-02T00:00:00.000+01:00",
+          enhedstype: 'PERSON',
+          sidstOpdateret: '2015-01-02T00:00:00.000+01:00'
         },
-        etag: "1107789726218383806",
-      }.to_json,
+        etag: '1107789726218383806'
+      }.to_json
     )
   end
   let(:record) { RegisterSourcesDk::Record[record_h].Vrdeltagerperson }
@@ -186,13 +188,13 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
               {
                 match: {
                   etag: {
-                    query: record.etag,
-                  },
-                },
-              },
-            ],
-          },
-        },
+                    query: record.etag
+                  }
+                }
+              }
+            ]
+          }
+        }
       }
     end
 
@@ -200,9 +202,9 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
       it 'returns matching record' do
         expect(client).to receive(:search).with(
           index:,
-          body: expected_get_query,
+          body: expected_get_query
         ).and_return({
-                       'hits' => { 'hits' => [{ '_score' => 0.9, '_source' => record_h }] },
+                       'hits' => { 'hits' => [{ '_score' => 0.9, '_source' => record_h }] }
                      })
 
         expect(subject.get(record.etag)).to eq record
@@ -213,9 +215,9 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
       it 'returns nil' do
         expect(client).to receive(:search).with(
           index:,
-          body: expected_get_query,
+          body: expected_get_query
         ).and_return({
-                       'hits' => { 'hits' => [] },
+                       'hits' => { 'hits' => [] }
                      })
 
         expect(subject.get(record.etag)).to be_nil
@@ -231,11 +233,11 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
             {
               index: {
                 _index: index,
-                _id: "1107789726218383806",
-                data: { etag: "1107789726218383806", Vrdeltagerperson: record.to_h },
-              },
-            },
-          ],
+                _id: '1107789726218383806',
+                data: { etag: '1107789726218383806', Vrdeltagerperson: record.to_h }
+              }
+            }
+          ]
         ).and_return({})
 
         expect(subject.store([record])).to be true

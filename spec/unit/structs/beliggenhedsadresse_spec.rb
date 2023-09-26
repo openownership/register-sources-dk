@@ -1,22 +1,24 @@
+# frozen_string_literal: true
+
 require 'register_sources_dk/structs/beliggenhedsadresse'
 
 RSpec.describe RegisterSourcesDk::Beliggenhedsadresse do
   let(:valid) do
     {
-      landekode: "DK",
+      landekode: 'DK',
       fritekst: nil,
       husnummerFra: 1,
       husnummerTil: nil,
       etage: nil,
       conavn: nil,
       postboks: nil,
-      vejnavn: "Example Vej",
+      vejnavn: 'Example Vej',
       postnummer: 1234,
-      postdistrikt: "Example Town",
+      postdistrikt: 'Example Town',
       periode: {
-        gyldigFra: "2015-01-01",
-        gyldigTil: nil,
-      },
+        gyldigFra: '2015-01-01',
+        gyldigTil: nil
+      }
     }
   end
 

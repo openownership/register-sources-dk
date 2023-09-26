@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'register_sources_dk/config/elasticsearch'
 
 module RegisterSourcesDk
   module Services
     class EsIndexCreator
-      DEFAULT_MAPPINGS_PATH = File.absolute_path(File.join(File.expand_path(__FILE__), '../mappings/vrdeltagerperson.json'))
+      DEFAULT_MAPPINGS_PATH = File.absolute_path(File.join(File.expand_path(__FILE__),
+                                                           '../mappings/vrdeltagerperson.json'))
 
       def initialize(
         client: Config::ELASTICSEARCH_CLIENT,

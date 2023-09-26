@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 require 'register_sources_dk/structs/kommune'
 
 RSpec.describe RegisterSourcesDk::Kommune do
   let(:valid) do
     {
       kommuneKode: 101,
-      kommuneNavn: "kommuneNavn",
+      kommuneNavn: 'kommuneNavn',
       periode: {
-        gyldigFra: "2009-06-01",
-        gyldigTil: nil,
+        gyldigFra: '2009-06-01',
+        gyldigTil: nil
       },
-      sidstOpdateret: "2016-12-09T03:00:00.000+01:00",
+      sidstOpdateret: '2016-12-09T03:00:00.000+01:00'
     }
   end
 
@@ -19,9 +21,9 @@ RSpec.describe RegisterSourcesDk::Kommune do
     expect(kommune.kommuneKode).to eq 101
     expect(kommune.kommuneNavn).to eq 'kommuneNavn'
     expect(kommune.periode).to eq RegisterSourcesDk::Periode[{
-      gyldigFra: "2009-06-01",
-      gyldigTil: nil,
+      gyldigFra: '2009-06-01',
+      gyldigTil: nil
     }]
-    expect(kommune.sidstOpdateret).to eq "2016-12-09T03:00:00.000+01:00"
+    expect(kommune.sidstOpdateret).to eq '2016-12-09T03:00:00.000+01:00'
   end
 end
