@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors = ['Josh Williams']
   spec.email = ['josh@spacesnottabs.com']
 
-  spec.summary = 'Library for storing and retrieving DK Records from UK Companies House.'
+  spec.summary = 'Library for storing and retrieving DK Records.'
   spec.description = spec.summary
   spec.homepage = 'https://github.com/openownership/register-sources-dk'
   spec.required_ruby_version = '>= 3.1'
