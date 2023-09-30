@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'elasticsearch'
 require 'register_sources_dk/repositories/deltagerperson_repository'
 require 'register_sources_dk/services/es_index_creator'
@@ -26,7 +28,7 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
   before do
     index_creator = RegisterSourcesDk::Services::EsIndexCreator.new(
       es_index: index,
-      client: es_client,
+      client: es_client
     )
     index_creator.create_index
   end
@@ -42,11 +44,11 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
       expect(subject.get(record.etag)).to eq record
 
       # When records do not exist
-      expect(subject.get("missing")).to be_nil
+      expect(subject.get('missing')).to be_nil
 
       # Check identifiers when 'DK Centrale Virksomhedsregister'
       identifiers = [
-        BodsIdentifier.new(2, 'DK Centrale Virksomhedsregister'),
+        BodsIdentifier.new(2, 'DK Centrale Virksomhedsregister')
       ]
 
       results = subject.get_by_bods_identifiers(identifiers)
@@ -55,7 +57,7 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
 
       # Check identifiers when 'Danish Central Business Register'
       identifiers = [
-        BodsIdentifier.new(1_234_567, 'Danish Central Business Register'),
+        BodsIdentifier.new(1_234_567, 'Danish Central Business Register')
       ]
 
       results = subject.get_by_bods_identifiers(identifiers)

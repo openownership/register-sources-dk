@@ -7,7 +7,6 @@
 /spec/reports/
 /tmp/
 vendor/
-notes/
 
 # rspec failure tracking
 .rspec_status

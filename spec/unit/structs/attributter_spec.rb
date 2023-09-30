@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 require 'register_sources_dk/structs/attributter'
 
 RSpec.describe RegisterSourcesDk::Attributter do
   let(:valid_attributter) do
     {
-      type: "FUNKTION",
+      type: 'FUNKTION',
       vaerdier: [
         {
-          vaerdi: "Reel ejer",
+          vaerdi: 'Reel ejer',
           periode: {
-            gyldigFra: "2015-01-01",
-            gyldigTil: nil,
+            gyldigFra: '2015-01-01',
+            gyldigTil: nil
           },
-          sidstOpdateret: "2015-01-02T00:00:00.000+02:00",
-        },
-      ],
+          sidstOpdateret: '2015-01-02T00:00:00.000+02:00'
+        }
+      ]
     }
   end
 

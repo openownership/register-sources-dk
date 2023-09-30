@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'register_sources_dk/config/elasticsearch'
 
 require 'register_sources_dk/structs/deltagerperson'
@@ -26,15 +28,15 @@ module RegisterSourcesDk
                     {
                       match: {
                         etag: {
-                          query: etag,
-                        },
-                      },
-                    },
-                  ],
-                },
-              },
-            },
-          ),
+                          query: etag
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          )
         ).first&.record
       end
 
@@ -50,22 +52,23 @@ module RegisterSourcesDk
               _id: record.etag,
               data: {
                 Vrdeltagerperson: record.to_h,
-                etag: record.etag,
-              },
-            },
+                etag: record.etag
+              }
+            }
           }
         end
 
         result = client.bulk(body: operations)
 
         if result['errors']
-          print "Error result: ", result, "\n\n"
+          print 'Error result: ', result, "\n\n"
           raise ElasticsearchError, errors: result['errors']
         end
 
         true
       end
 
+      # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       def get_by_bods_identifiers(identifiers, per_page: nil)
         enheds_nummers = [] # enhedsNummer
         cvrs = [] # virksomhedSummariskRelation.virksomhed.cvrNummer
@@ -90,26 +93,29 @@ module RegisterSourcesDk
                     {
                       bool: {
                         must: [
-                          { match: { 'Vrdeltagerperson.enhedsNummer': { query: id.to_i } } },
-                        ],
-                      },
+                          { match: { 'Vrdeltagerperson.enhedsNummer': { query: id.to_i } } }
+                        ]
+                      }
                     }
                   } + cvrs.map do |id|
                     {
                       bool: {
                         must: [
-                          { match: { 'Vrdeltagerperson.virksomhedSummariskRelation.virksomhed.cvrNummer': { query: id.to_i } } },
-                        ],
-                      },
+                          { match: { 'Vrdeltagerperson.virksomhedSummariskRelation.virksomhed.cvrNummer': {
+                            query: id.to_i
+                          } } }
+                        ]
+                      }
                     }
-                  end,
-                },
+                  end
+                }
               },
-              size: per_page || 10_000,
-            },
-          ),
+              size: per_page || 10_000
+            }
+          )
         ).map(&:record)
       end
+      # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
       private
 
@@ -117,7 +123,7 @@ module RegisterSourcesDk
 
       def process_results(results)
         hits = results.dig('hits', 'hits') || []
-        hits = hits.sort { |hit| hit['_score'] }.reverse
+        hits = hits.sort { |hit| hit['_score'] }.reverse # rubocop:disable Lint/UnexpectedBlockArity # FIXME
 
         mapped = hits.map do |hit|
           SearchResult.new(map_es_record(hit['_source']), hit['_score'])
