@@ -5,7 +5,6 @@ module RegisterSourcesDk
 end
 
 require 'register_sources_dk'
-require 'register_sources_dk/config'
 require 'webmock/rspec'
 
 RSpec.configure do |config|

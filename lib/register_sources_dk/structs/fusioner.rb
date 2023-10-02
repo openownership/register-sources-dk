@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-require 'register_sources_dk/types'
-
-require 'register_sources_dk/structs/attributter'
-require 'register_sources_dk/structs/navne'
-require 'register_sources_dk/structs/vaerdier'
+require_relative '../types'
+require_relative 'attributter'
+require_relative 'navne'
+require_relative 'vaerdier'
 
 module RegisterSourcesDk
   # NOTE: duplicate
@@ -12,8 +11,8 @@ module RegisterSourcesDk
     transform_keys(&:to_sym)
 
     attribute? :enhedsNummerOrganisation, Types::Nominal::Integer.optional # long
-    attribute? :indgaaende, Attributter.optional
-    attribute? :organisationsNavn, Navne.optional
-    attribute? :udgaaende, Attributter.optional
+    attribute? :indgaaende,               Attributter.optional
+    attribute? :organisationsNavn,        Navne.optional
+    attribute? :udgaaende,                Attributter.optional
   end
 end

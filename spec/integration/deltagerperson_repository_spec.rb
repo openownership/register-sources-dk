@@ -27,8 +27,8 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
 
   before do
     index_creator = RegisterSourcesDk::Services::EsIndexCreator.new(
-      es_index: index,
-      client: es_client
+      client: es_client,
+      index:
     )
     index_creator.create_index
   end

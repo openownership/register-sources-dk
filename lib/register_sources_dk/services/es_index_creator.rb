@@ -1,37 +1,29 @@
 # frozen_string_literal: true
 
 require 'json'
-require 'register_sources_dk/config/elasticsearch'
+
+require_relative '../config/elasticsearch'
 
 module RegisterSourcesDk
   module Services
     class EsIndexCreator
-      DEFAULT_MAPPINGS_PATH = File.absolute_path(File.join(File.expand_path(__FILE__),
-                                                           '../mappings/vrdeltagerperson.json'))
+      MAPPINGS = JSON.parse(File.read(File.expand_path('mappings/vrdeltagerperson.json', __dir__)))
 
       def initialize(
         client: Config::ELASTICSEARCH_CLIENT,
-        es_index: Config::DELTAGERPERSON_ES_INDEX,
-        mappings_path: DEFAULT_MAPPINGS_PATH
+        index: Config::ELASTICSEARCH_INDEX
       )
         @client = client
-        @es_index = es_index
-        @mappings_path = mappings_path
+        @index = index
       end
 
       def create_index
-        mappings = load_mappings
-
-        client.indices.create index: es_index, body: { mappings: }
+        client.indices.create index:, body: { mappings: MAPPINGS }
       end
 
       private
 
-      attr_reader :client, :es_index, :mappings_path
-
-      def load_mappings
-        JSON.parse(File.read(mappings_path))
-      end
+      attr_reader :client, :index
     end
   end
 end

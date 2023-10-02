@@ -1,18 +1,16 @@
 # frozen_string_literal: true
 
-require 'register_sources_dk/config/elasticsearch'
-
-require 'register_sources_dk/structs/deltagerperson'
+require_relative '../config/elasticsearch'
+require_relative '../structs/deltagerperson'
 
 module RegisterSourcesDk
   module Repositories
     class DeltagerpersonRepository
-      UnknownRecordKindError = Class.new(StandardError)
       ElasticsearchError = Class.new(StandardError)
 
       SearchResult = Struct.new(:record, :score)
 
-      def initialize(client: Config::ELASTICSEARCH_CLIENT, index: Config::DELTAGERPERSON_ES_INDEX)
+      def initialize(client: Config::ELASTICSEARCH_CLIENT, index: Config::ELASTICSEARCH_INDEX)
         @client = client
         @index = index
       end

@@ -35,15 +35,15 @@ RSpec/ExampleLength:
 RSpec/FilePath:
   Exclude:
     - spec/integration/deltagerperson_repository_spec.rb
-    - spec/register_sources_dk.rb
+    - spec/unit/register_sources_dk.rb
     - spec/unit/repositories/deltagerperson_repository_spec.rb
     - spec/unit/services/es_index_creator_spec.rb
     - spec/unit/structs/attributter_spec.rb
     - spec/unit/structs/beliggenhedsadresse_spec.rb
     - spec/unit/structs/beskaeftigelse_spec.rb
     - spec/unit/structs/branche_spec.rb
-    - spec/unit/structs/deltagerperson_spec.rb
     - spec/unit/structs/deltager_relation_spec.rb
+    - spec/unit/structs/deltagerperson_spec.rb
     - spec/unit/structs/fusioner_spec.rb
     - spec/unit/structs/kommune_spec.rb
     - spec/unit/structs/livsforloeb_spec.rb
@@ -58,10 +58,10 @@ RSpec/FilePath:
     - spec/unit/structs/tele_nummer_spec.rb
     - spec/unit/structs/vaerdier_spec.rb
     - spec/unit/structs/virksomhed_metadata_spec.rb
-    - spec/unit/structs/virksomhedsform_spec.rb
     - spec/unit/structs/virksomhed_spec.rb
-    - spec/unit/structs/virksomhedsstatus_spec.rb
     - spec/unit/structs/virksomhed_summarisk_relation_spec.rb
+    - spec/unit/structs/virksomhedsform_spec.rb
+    - spec/unit/structs/virksomhedsstatus_spec.rb
 RSpec/MessageSpies:
   Exclude:
     - spec/unit/repositories/deltagerperson_repository_spec.rb
