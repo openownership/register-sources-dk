@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'register_sources_dk/types'
+require_relative '../types'
 
 module RegisterSourcesDk
   class Periode < Dry::Struct
