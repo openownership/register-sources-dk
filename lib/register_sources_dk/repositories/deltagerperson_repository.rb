@@ -79,7 +79,7 @@ module RegisterSourcesDk
         true
       end
 
-      # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      # rubocop:disable Metrics/CyclomaticComplexity
       def build_get_by_bods_identifiers(identifiers)
         enheds_nummers = [] # enhedsNummer
         cvrs = [] # virksomhedSummariskRelation.virksomhed.cvrNummer
@@ -100,23 +100,29 @@ module RegisterSourcesDk
               {
                 bool: {
                   must: [
-                    { match: { 'Vrdeltagerperson.enhedsNummer': { query: id.to_i } } },
-                  ],
-                },
+                    { match: { 'Vrdeltagerperson.enhedsNummer': { query: id.to_i } } }
+                  ]
+                }
               }
             } + cvrs.map do |id|
               {
                 bool: {
                   must: [
-                    { match: { 'Vrdeltagerperson.virksomhedSummariskRelation.virksomhed.cvrNummer': { query: id.to_i } } },
-                  ],
-                },
+                    {
+                      match: {
+                        'Vrdeltagerperson.virksomhedSummariskRelation.virksomhed.cvrNummer': {
+                          query: id.to_i
+                        }
+                      }
+                    }
+                  ]
+                }
               }
-            end,
-          },
+            end
+          }
         }
       end
-      # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      # rubocop:enable Metrics/CyclomaticComplexity
 
       private
 
@@ -132,7 +138,7 @@ module RegisterSourcesDk
         SearchResults.new(
           mapped.sort_by(&:score).reverse,
           total_count:,
-          aggs: results['aggregations'],
+          aggs: results['aggregations']
         )
       end
 

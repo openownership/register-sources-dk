@@ -42,7 +42,7 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
       expect(subject.get(record.etag)).to eq record
 
       # When records do not exist
-      expect(subject.get("missing")).to be_nil
+      expect(subject.get('missing')).to be_nil
     end
   end
 end

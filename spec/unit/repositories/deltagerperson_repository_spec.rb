@@ -268,7 +268,7 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
     it 'builds query for searching by bods identifiers' do
       identifiers = [
         BodsIdentifier.new(2, 'DK Centrale Virksomhedsregister'),
-        BodsIdentifier.new(1_234_567, 'Danish Central Business Register'),
+        BodsIdentifier.new(1_234_567, 'Danish Central Business Register')
       ]
 
       query = subject.build_get_by_bods_identifiers(identifiers)
@@ -283,12 +283,12 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
                     {
                       match: {
                         'Vrdeltagerperson.enhedsNummer': {
-                          query: 2,
-                        },
-                      },
-                    },
-                  ],
-                },
+                          query: 2
+                        }
+                      }
+                    }
+                  ]
+                }
               },
               {
                 bool: {
@@ -296,16 +296,16 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
                     {
                       match: {
                         'Vrdeltagerperson.virksomhedSummariskRelation.virksomhed.cvrNummer': {
-                          query: 1_234_567,
-                        },
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-          },
-        },
+                          query: 1_234_567
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
       )
     end
   end
