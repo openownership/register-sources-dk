@@ -2,6 +2,9 @@
 
 require 'json'
 require 'register_sources_dk/repositories/deltagerperson_repository'
+require 'register_sources_dk/structs/record'
+
+BodsIdentifier = Struct.new(:id, :schemeName)
 
 RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
   subject { described_class.new(client:, index:) }
@@ -258,6 +261,52 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
 
         expect { subject.store([record]) }.to raise_error(described_class::ElasticsearchError)
       end
+    end
+  end
+
+  describe '#build_get_by_bods_identifiers' do
+    it 'builds query for searching by bods identifiers' do
+      identifiers = [
+        BodsIdentifier.new(2, 'DK Centrale Virksomhedsregister'),
+        BodsIdentifier.new(1_234_567, 'Danish Central Business Register')
+      ]
+
+      query = subject.build_get_by_bods_identifiers(identifiers)
+
+      expect(query).to eq(
+        {
+          bool: {
+            should: [
+              {
+                bool: {
+                  must: [
+                    {
+                      match: {
+                        'Vrdeltagerperson.enhedsNummer': {
+                          query: 2
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                bool: {
+                  must: [
+                    {
+                      match: {
+                        'Vrdeltagerperson.virksomhedSummariskRelation.virksomhed.cvrNummer': {
+                          query: 1_234_567
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      )
     end
   end
 end

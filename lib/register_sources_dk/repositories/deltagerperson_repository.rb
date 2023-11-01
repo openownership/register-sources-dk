@@ -10,10 +10,23 @@ module RegisterSourcesDk
 
       SearchResult = Struct.new(:record, :score)
 
+      class SearchResults < Array
+        def initialize(arr, total_count: nil, aggs: nil)
+          @total_count = total_count || arr.to_a.count
+          @aggs = aggs
+
+          super(arr)
+        end
+
+        attr_reader :total_count, :aggs
+      end
+
       def initialize(client: Config::ELASTICSEARCH_CLIENT, index: Config::ELASTICSEARCH_INDEX)
         @client = client
         @index = index
       end
+
+      attr_reader :client, :index
 
       def get(etag)
         process_results(
@@ -66,8 +79,8 @@ module RegisterSourcesDk
         true
       end
 
-      # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-      def get_by_bods_identifiers(identifiers, per_page: nil)
+      # rubocop:disable Metrics/CyclomaticComplexity
+      def build_get_by_bods_identifiers(identifiers)
         enheds_nummers = [] # enhedsNummer
         cvrs = [] # virksomhedSummariskRelation.virksomhed.cvrNummer
         identifiers.each do |identifier|
@@ -79,55 +92,54 @@ module RegisterSourcesDk
           end
         end
 
-        return [] if cvrs.empty? && enheds_nummers.empty?
+        return if cvrs.empty? && enheds_nummers.empty?
 
-        process_results(
-          client.search(
-            index:,
-            body: {
-              query: {
+        {
+          bool: {
+            should: enheds_nummers.map { |id|
+              {
                 bool: {
-                  should: enheds_nummers.map { |id|
-                    {
-                      bool: {
-                        must: [
-                          { match: { 'Vrdeltagerperson.enhedsNummer': { query: id.to_i } } }
-                        ]
-                      }
-                    }
-                  } + cvrs.map do |id|
-                    {
-                      bool: {
-                        must: [
-                          { match: { 'Vrdeltagerperson.virksomhedSummariskRelation.virksomhed.cvrNummer': {
-                            query: id.to_i
-                          } } }
-                        ]
-                      }
-                    }
-                  end
+                  must: [
+                    { match: { 'Vrdeltagerperson.enhedsNummer': { query: id.to_i } } }
+                  ]
                 }
-              },
-              size: per_page || 10_000
-            }
-          )
-        ).map(&:record)
+              }
+            } + cvrs.map do |id|
+              {
+                bool: {
+                  must: [
+                    {
+                      match: {
+                        'Vrdeltagerperson.virksomhedSummariskRelation.virksomhed.cvrNummer': {
+                          query: id.to_i
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            end
+          }
+        }
       end
-      # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      # rubocop:enable Metrics/CyclomaticComplexity
 
       private
-
-      attr_reader :client, :index
 
       def process_results(results)
         hits = results.dig('hits', 'hits') || []
         hits = hits.sort { |hit| hit['_score'] }.reverse # rubocop:disable Lint/UnexpectedBlockArity # FIXME
+        total_count = results.dig('hits', 'total', 'value') || 0
 
         mapped = hits.map do |hit|
           SearchResult.new(map_es_record(hit['_source']), hit['_score'])
         end
 
-        mapped.sort_by(&:score).reverse
+        SearchResults.new(
+          mapped.sort_by(&:score).reverse,
+          total_count:,
+          aggs: results['aggregations']
+        )
       end
 
       def map_es_record(record)
