@@ -11,13 +11,15 @@ Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:
   Enabled: false
+RSpec/FilePath:
+  Enabled: false
 Style/Documentation:
   Enabled: false
 #-------------------------------------------------------------------------------
 RSpec/ExampleLength:
   Exclude:
-    - spec/integration/deltagerperson_repository_spec.rb
-    - spec/unit/repositories/deltagerperson_repository_spec.rb
+    - spec/integration/repository_spec.rb
+    - spec/unit/repository_spec.rb
     - spec/unit/structs/attributter_spec.rb
     - spec/unit/structs/beliggenhedsadresse_spec.rb
     - spec/unit/structs/beskaeftigelse_spec.rb
@@ -31,45 +33,15 @@ RSpec/ExampleLength:
     - spec/unit/structs/reg_nummer_spec.rb
     - spec/unit/structs/tele_nummer_spec.rb
     - spec/unit/structs/vaerdier_spec.rb
-    - spec/unit/structs/virksomhedsstatus_spec.rb
-RSpec/FilePath:
-  Exclude:
-    - spec/integration/deltagerperson_repository_spec.rb
-    - spec/unit/register_sources_dk.rb
-    - spec/unit/repositories/deltagerperson_repository_spec.rb
-    - spec/unit/services/es_index_creator_spec.rb
-    - spec/unit/structs/attributter_spec.rb
-    - spec/unit/structs/beliggenhedsadresse_spec.rb
-    - spec/unit/structs/beskaeftigelse_spec.rb
-    - spec/unit/structs/branche_spec.rb
-    - spec/unit/structs/deltager_relation_spec.rb
-    - spec/unit/structs/deltagerperson_spec.rb
-    - spec/unit/structs/fusioner_spec.rb
-    - spec/unit/structs/kommune_spec.rb
-    - spec/unit/structs/livsforloeb_spec.rb
-    - spec/unit/structs/navne_spec.rb
-    - spec/unit/structs/penheder_spec.rb
-    - spec/unit/structs/periode_spec.rb
-    - spec/unit/structs/postadresse_spec.rb
-    - spec/unit/structs/record_spec.rb
-    - spec/unit/structs/reg_nummer_spec.rb
-    - spec/unit/structs/spaltninger_spec.rb
-    - spec/unit/structs/status_spec.rb
-    - spec/unit/structs/tele_nummer_spec.rb
-    - spec/unit/structs/vaerdier_spec.rb
-    - spec/unit/structs/virksomhed_metadata_spec.rb
-    - spec/unit/structs/virksomhed_spec.rb
-    - spec/unit/structs/virksomhed_summarisk_relation_spec.rb
-    - spec/unit/structs/virksomhedsform_spec.rb
     - spec/unit/structs/virksomhedsstatus_spec.rb
 RSpec/MessageSpies:
   Exclude:
-    - spec/unit/repositories/deltagerperson_repository_spec.rb
+    - spec/unit/repository_spec.rb
     - spec/unit/services/es_index_creator_spec.rb
 RSpec/MultipleExpectations:
   Exclude:
-    - spec/integration/deltagerperson_repository_spec.rb
-    - spec/unit/repositories/deltagerperson_repository_spec.rb
+    - spec/integration/repository_spec.rb
+    - spec/unit/repository_spec.rb
     - spec/unit/structs/attributter_spec.rb
     - spec/unit/structs/beliggenhedsadresse_spec.rb
     - spec/unit/structs/beskaeftigelse_spec.rb
@@ -87,13 +59,13 @@ RSpec/MultipleExpectations:
     - spec/unit/structs/virksomhedsstatus_spec.rb
 RSpec/NamedSubject:
   Exclude:
-    - spec/integration/deltagerperson_repository_spec.rb
-    - spec/unit/repositories/deltagerperson_repository_spec.rb
+    - spec/integration/repository_spec.rb
+    - spec/unit/repository_spec.rb
     - spec/unit/services/es_index_creator_spec.rb
 RSpec/StubbedMock:
   Exclude:
-    - spec/unit/repositories/deltagerperson_repository_spec.rb
+    - spec/unit/repository_spec.rb
 RSpec/VerifiedDoubles:
   Exclude:
-    - spec/unit/repositories/deltagerperson_repository_spec.rb
+    - spec/unit/repository_spec.rb
     - spec/unit/services/es_index_creator_spec.rb
