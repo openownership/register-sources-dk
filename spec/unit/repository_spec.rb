@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 require 'json'
-require 'register_sources_dk/repositories/deltagerperson_repository'
+require 'register_sources_dk/repository'
 require 'register_sources_dk/structs/record'
 
 BodsIdentifier = Struct.new(:id, :schemeName)
 
-RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
+RSpec.describe RegisterSourcesDk::Repository do
   subject { described_class.new(client:, index:) }
 
   let(:client) { double 'client' }

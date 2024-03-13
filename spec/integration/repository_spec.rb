@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 require 'elasticsearch'
-require 'register_sources_dk/repositories/deltagerperson_repository'
+require 'register_sources_dk/repository'
 require 'register_sources_dk/services/es_index_creator'
 require 'register_sources_dk/structs/record'
 
-RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
+RSpec.describe RegisterSourcesDk::Repository do
   subject { described_class.new(client: es_client, index:) }
 
-  let(:index) { SecureRandom.uuid }
+  let(:index) { "tmp-#{SecureRandom.uuid}" }
   let(:es_client) { Elasticsearch::Client.new }
 
   let(:record) do
@@ -24,11 +24,12 @@ RSpec.describe RegisterSourcesDk::Repositories::DeltagerpersonRepository do
   end
 
   before do
-    index_creator = RegisterSourcesDk::Services::EsIndexCreator.new(
-      client: es_client,
-      index:
-    )
-    index_creator.create_index
+    index_creator = RegisterSourcesDk::Services::EsIndexCreator.new(client: es_client)
+    index_creator.create_index(index)
+  end
+
+  after do
+    es_client.indices.delete(index:)
   end
 
   describe '#store' do
